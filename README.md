@@ -6,9 +6,11 @@ Course Website: https://inst.eecs.berkeley.edu/~cs61a/fa20/
 - 🔴 **Lab**
   - [x] [Lab00](./lab/lab00/lab00.py)
   - [x] [Lab01](./lab/lab01/lab01.py)
+  - [x] [Lab02](./lab/lab02/lab02.py)
 - 🔴 **Homework**
   - [x] [Hw01](./homework/hw01/hw01.py)
 - 🔴 **Project**
+  - [ ] [Hog](./project/hog/hog.py)
 ---
 
 ### Notes
