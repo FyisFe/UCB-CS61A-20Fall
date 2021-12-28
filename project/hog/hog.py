@@ -178,18 +178,20 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
         if who == 0: 
             num_of_dice = strategy0(score0, score1)
             score0 += take_turn(num_of_dice, score1, dice)
+            say = say(score0, score1)
             if not extra_turn(score0, score1): # Only change who if there is no extra turn
                 who = other(who)
        
         elif who == 1:
             num_of_dice = strategy1(score1, score0)
             score1 += take_turn(num_of_dice, score0, dice)
+            say = say(score0, score1)
             if not extra_turn(score1, score0): # Only change who if there is no extra turn
                 who = other(who)
     # END PROBLEM 5
+
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
-    "*** YOUR CODE HERE ***"
     # END PROBLEM 6
     return score0, score1
 
@@ -248,7 +250,7 @@ def both(f, g):
     Player 1 takes the lead by 7
     """
     def say(score0, score1):
-        return both(f(score0, score1), g(score0, score1))
+        return both(f(score0, score1), g(score0, score1)) # function f and g are executed from left to right
     return say
 
 
@@ -274,6 +276,20 @@ def announce_highest(who, last_score=0, running_high=0):
     assert who == 0 or who == 1, 'The who argument should indicate a player.'
     # BEGIN PROBLEM 7
     "*** YOUR CODE HERE ***"
+    def say(score0, score1):
+        if who == 0:
+            gain = score0 - last_score
+            if gain > running_high:
+                print(gain, "point(s)! The most yet for Player", who)
+                return announce_highest(who, score0, gain)
+            return announce_highest(who, score0, running_high)
+        else:
+            gain = score1 - last_score
+            if gain > running_high:
+                print(gain, "point(s)! The most yet for Player", who)
+                return announce_highest(who, score1, gain)
+            return announce_highest(who, score1, running_high)
+    return say
     # END PROBLEM 7
 
 
