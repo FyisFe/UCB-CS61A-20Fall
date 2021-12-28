@@ -1,5 +1,6 @@
 """CS 61A Presents The Game of Hog."""
 
+from typing import Counter
 from dice import six_sided, four_sided, make_test_dice
 from ucb import main, trace, interact
 
@@ -330,6 +331,13 @@ def make_averaged(original_function, trials_count=1000):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    def get_averaged(*args):
+        result = 0
+        for i in range(trials_count):
+            result += original_function(*args)
+        return result / trials_count
+
+    return  get_averaged
     # END PROBLEM 8
 
 
@@ -343,7 +351,17 @@ def max_scoring_num_rolls(dice=six_sided, trials_count=1000):
     1
     """
     # BEGIN PROBLEM 9
-    "*** YOUR CODE HERE ***"
+    max_num = 0 # number of dice that gives the highest average turn score
+    max_res = 0 # highest average turn score
+
+    for i in range(1,11):
+        get_average = make_averaged(roll_dice, trials_count) 
+        cur_res = get_average(i, dice)
+        if cur_res > max_res:
+            max_num = i
+            max_res = cur_res
+    return max_num
+    
     # END PROBLEM 9
 
 
@@ -393,7 +411,10 @@ def bacon_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     rolls NUM_ROLLS otherwise.
     """
     # BEGIN PROBLEM 10
-    return 6  # Replace this statement
+    bacon_score = free_bacon(opponent_score)
+    if bacon_score >= cutoff:
+        return 0
+    return num_rolls
     # END PROBLEM 10
 
 
@@ -403,7 +424,12 @@ def extra_turn_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     Otherwise, it rolls NUM_ROLLS.
     """
     # BEGIN PROBLEM 11
-    return 6  # Replace this statement
+    bacon_score = free_bacon(opponent_score)
+
+    if extra_turn(score + bacon_score, opponent_score):
+        return 0
+
+    return bacon_strategy(score, opponent_score, cutoff, num_rolls)
     # END PROBLEM 11
 
 
