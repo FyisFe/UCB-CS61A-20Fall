@@ -73,6 +73,10 @@ def take_turn(num_rolls, opponent_score, dice=six_sided):
     assert opponent_score < 100, 'The game should be over.'
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
+
+    if num_rolls:
+        return roll_dice(num_rolls, dice)
+    return free_bacon(opponent_score)
     # END PROBLEM 3
 
 
@@ -81,7 +85,14 @@ def extra_turn(player_score, opponent_score):
     return (pig_pass(player_score, opponent_score) or
             swine_align(player_score, opponent_score))
 
+def computeGCD(x, y):
+    if y == 0:
+        return x
+    else: 
+        return computeGCD(y,x % y)
 
+
+# Swine Align. After points for the turn are added to the current player's score, if both players have a positive score and the Greatest Common Divisor (GCD) of the current player's score and the opponent's score is at least 10, take another turn. In the special case where one score is 0, return False.
 def swine_align(player_score, opponent_score):
     """Return whether the player gets an extra turn due to Swine Align.
 
@@ -96,8 +107,13 @@ def swine_align(player_score, opponent_score):
     # BEGIN PROBLEM 4a
     "*** YOUR CODE HERE ***"
     # END PROBLEM 4a
+    if not player_score or not opponent_score:
+        return False
+    if computeGCD(player_score, opponent_score) >= 10:
+        return True
+    return False
 
-
+# Pig Pass. After points for the turn are added to the current player's score, if the current player's score is lower than the opponent's score and the difference between them is less than 3, the current player takes another turn.
 def pig_pass(player_score, opponent_score):
     """Return whether the player gets an extra turn due to Pig Pass.
 
@@ -118,7 +134,9 @@ def pig_pass(player_score, opponent_score):
     # BEGIN PROBLEM 4b
     "*** YOUR CODE HERE ***"
     # END PROBLEM 4b
-
+    if opponent_score - player_score > 0 and opponent_score - player_score < 3:
+        return True
+    return False
 
 def other(who):
     """Return the other player, for a player WHO numbered 0 or 1.
@@ -156,6 +174,18 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    while score0 < goal and score1 < goal:
+        if who == 0: 
+            num_of_dice = strategy0(score0, score1)
+            score0 += take_turn(num_of_dice, score1, dice)
+            if not extra_turn(score0, score1): # Only change who if there is no extra turn
+                who = other(who)
+       
+        elif who == 1:
+            num_of_dice = strategy1(score1, score0)
+            score1 += take_turn(num_of_dice, score0, dice)
+            if not extra_turn(score1, score0): # Only change who if there is no extra turn
+                who = other(who)
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
