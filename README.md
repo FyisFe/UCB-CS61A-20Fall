@@ -10,7 +10,7 @@ Course Website: https://inst.eecs.berkeley.edu/~cs61a/fa20/
 - 🔴 **Homework**
   - [x] [Hw01](./homework/hw01/hw01.py)
 - 🔴 **Project**
-  - [ ] [Hog](./project/hog/hog.py)
+  - [x] [Hog](./project/hog/hog.py)
 ---
 
 ### Notes
