@@ -119,12 +119,12 @@ def cycle(f1, f2, f3):
     """
     "*** YOUR CODE HERE ***"
     def func(n):
-        def runner(func):
+        def runner(x):
             for i in range(0,n):
-                if(i%3 == 0): func = f1(func)
-                elif(i%3 == 1): func = f2(func)
-                else: func = f3(func)
-            return func
+                if(i%3 == 0): x = f1(x)
+                elif(i%3 == 1): x = f2(x)
+                else: x = f3(x)
+            return x
         return runner
     return func
     
