@@ -1,4 +1,4 @@
-HW_SOURCE_FILE=__file__
+HW_SOURCE_FILE = __file__
 
 
 def num_eights(x):
@@ -67,12 +67,12 @@ def pingpong(n):
 
     # while version
     # index, sign, value = 1, 1, 1
-    # while index < n: 
+    # while index < n:
     #     value += sign * 1
     #     index += 1
     #     if index % 8 == 0 or num_eights(index):
     #         sign *= -1
-    # return value   
+    # return value
 
     # HINT: Write a helper function that has a parameter for each variable that changes values in the body of the while loop.
     def helper(index, sign, value):
@@ -82,6 +82,7 @@ def pingpong(n):
             return helper(index + 1, -sign, value - sign)
         else:
             return helper(index + 1, sign, value + sign)
+
     return helper(1, 1, 1)
 
 
@@ -115,15 +116,15 @@ def missing_digits(n):
     "*** YOUR CODE HERE ***"
     if n < 10:
         return 0
-    
+
     if n % 10 - (n // 10) % 10 > 0:
         return n % 10 - (n // 10) % 10 - 1 + missing_digits(n // 10)
-    
+
     return missing_digits(n // 10)
-    
+
 
 def next_largest_coin(coin):
-    """Return the next coin. 
+    """Return the next coin.
     >>> next_largest_coin(1)
     5
     >>> next_largest_coin(5)
@@ -152,21 +153,25 @@ def count_coins(total):
     242
     >>> from construct_check import check
     >>> # ban iteration
-    >>> check(HW_SOURCE_FILE, 'count_coins', ['While', 'For'])                                          
+    >>> check(HW_SOURCE_FILE, 'count_coins', ['While', 'For'])
     True
     """
     "*** YOUR CODE HERE ***"
+
     def helper(coin, cur):
         if coin == None or cur + coin > total:
             return 0
-        
+
         if cur + coin == total:
             return 1
-        
-        return helper(coin, cur + coin) + helper(next_largest_coin(coin), cur) 
+
+        return helper(coin, cur + coin) + helper(next_largest_coin(coin), cur)
+
     return helper(1, 0)
 
+
 from operator import sub, mul
+
 
 def make_anonymous_factorial():
     """Return the value of an expression that computes factorial.
@@ -178,4 +183,6 @@ def make_anonymous_factorial():
     >>> check(HW_SOURCE_FILE, 'make_anonymous_factorial', ['Assign', 'AugAssign', 'FunctionDef', 'Recursion'])
     True
     """
-    return (lambda func: lambda n: func( func, n ) ) (lambda a,n: n*a(a,n-1) if n > 1 else 1)
+    return (lambda func: lambda n: func(func, n))(
+        lambda a, n: mul(n, a(a, sub(n, 1))) if n > 1 else 1
+    )
