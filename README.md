@@ -22,6 +22,7 @@ This repository contains my solutions for all labs, discussions, projects and ho
   - [x] [Hw02](./homework/hw02/hw02.py)
 - 🔴 **Project**
   - [x] [Hog](./project/hog/hog.py)
+  - [] [Cat](./project/cat/cat.py)
 
 ---
 
