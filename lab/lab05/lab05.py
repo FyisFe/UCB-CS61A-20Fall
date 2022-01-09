@@ -364,7 +364,9 @@ def construct_sent(word, table):
 
     result = ""
     while word not in [".", "!", "?"]:
-        "*** YOUR CODE HERE ***"
+        result += word + " "
+        word = random.choice(table[word])
+
     return result.strip() + word
 
 
@@ -490,11 +492,3 @@ def copy_tree(t):
     5
     """
     return tree(label(t), [copy_tree(b) for b in branches(t)])
-
-
-def test():
-    t1 = tree(1, [tree(2), tree(3)])
-    new1 = sprout_leaves(t1, [4, 5])
-
-
-test()
