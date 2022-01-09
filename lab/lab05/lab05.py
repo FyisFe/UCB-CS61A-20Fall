@@ -16,6 +16,7 @@ def couple(s, t):
 
 
 from math import sqrt
+from random import choice, randint
 
 
 def distance(city_a, city_b):
@@ -272,7 +273,7 @@ def coords(fn, seq, lower, upper):
     [[-2, 4], [1, 1], [3, 9]]
     """
     "*** YOUR CODE HERE ***"
-    return ______
+    return [[x, fn(x)] for x in seq if fn(x) in range(lower, upper + 1)]
 
 
 def riffle(deck):
@@ -285,7 +286,10 @@ def riffle(deck):
     [0, 10, 1, 11, 2, 12, 3, 13, 4, 14, 5, 15, 6, 16, 7, 17, 8, 18, 9, 19]
     """
     "*** YOUR CODE HERE ***"
-    return _______
+    return [
+        deck[x // 2] if x % 2 == 0 else deck[len(deck) // 2 + x // 2]
+        for x in range(0, len(deck))
+    ]
 
 
 def add_trees(t1, t2):
@@ -324,6 +328,25 @@ def add_trees(t1, t2):
       5
     """
     "*** YOUR CODE HERE ***"
+    len_t1, len_t2 = len(branches(t1)), len(branches(t2))
+    if len_t1 == len_t2:
+        return tree(
+            label(t1) + label(t2),
+            [add_trees(x, y) for x, y in list(zip(branches(t1), branches(t2)))],
+        )
+    elif len_t1 < len_t2:
+        return add_trees(
+            tree(
+                label(t1),
+                branches(t1)
+                + [
+                    tree(0) for add_zero in range(len_t2 - len_t1)
+                ],  # add zero to make two trees have the same number of branches
+            ),
+            t2,
+        )
+    else:
+        return add_trees(t2, t1)
 
 
 def build_successors_table(tokens):
@@ -344,8 +367,9 @@ def build_successors_table(tokens):
     prev = "."
     for word in tokens:
         if prev not in table:
-            "*** YOUR CODE HERE ***"
-        "*** YOUR CODE HERE ***"
+            table[prev] = [word]
+        else:
+            table[prev].append(word)
         prev = word
     return table
 
@@ -364,7 +388,9 @@ def construct_sent(word, table):
 
     result = ""
     while word not in [".", "!", "?"]:
-        "*** YOUR CODE HERE ***"
+        result += word + " "
+        word = random.choice(table[word])
+        
     return result.strip() + word
 
 
