@@ -250,7 +250,7 @@ def has_path(t, word):
     """
     assert len(word) > 0, "no path for empty word."
     "*** YOUR CODE HERE ***"
-    if  len(word) == 1:
+    if len(word) == 1:
         return label(t) == word
 
     return any([has_path(b, word[1:]) for b in branches(t)])
@@ -264,11 +264,13 @@ def interval(a, b):
 def lower_bound(x):
     """Return the lower bound of interval x."""
     "*** YOUR CODE HERE ***"
+    return x[0]
 
 
 def upper_bound(x):
     """Return the upper bound of interval x."""
     "*** YOUR CODE HERE ***"
+    return x[1]
 
 
 def str_interval(x):
@@ -287,11 +289,11 @@ def add_interval(x, y):
 def mul_interval(x, y):
     """Return the interval that contains the product of any value in x and any
     value in y."""
-    p1 = x[0] * y[0]
-    p2 = x[0] * y[1]
-    p3 = x[1] * y[0]
-    p4 = x[1] * y[1]
-    return [min(p1, p2, p3, p4), max(p1, p2, p3, p4)]
+    p1 = lower_bound(x) * lower_bound(y)
+    p2 = lower_bound(x) * upper_bound(y)
+    p3 = upper_bound(x) * lower_bound(y)
+    p4 = upper_bound(x) * upper_bound(y)
+    return interval(min(p1, p2, p3, p4), max(p1, p2, p3, p4))
 
 
 def sub_interval(x, y):
@@ -299,12 +301,15 @@ def sub_interval(x, y):
     and any value in y."""
     "*** YOUR CODE HERE ***"
 
+    return add_interval(x, interval(-upper_bound(y), -lower_bound(y)))
+
 
 def div_interval(x, y):
     """Return the interval that contains the quotient of any value in x divided by
     any value in y. Division is implemented as the multiplication of x by the
     reciprocal of y."""
     "*** YOUR CODE HERE ***"
+    assert not (upper_bound(y) >= 0 and lower_bound(y) <= 0)
     reciprocal_y = interval(1 / upper_bound(y), 1 / lower_bound(y))
     return mul_interval(x, reciprocal_y)
 
@@ -329,13 +334,16 @@ def check_par():
     >>> lower_bound(x) != lower_bound(y) or upper_bound(x) != upper_bound(y)
     True
     """
-    r1 = interval(1, 1)  # Replace this line!
-    r2 = interval(1, 1)  # Replace this line!
+    r1 = interval(1, 2)
+    r2 = interval(2, 3)
+    print(par1(r1, r2))
+    print(par2(r1, r2))
     return r1, r2
 
 
 def multiple_references_explanation():
-    return """The multiple reference problem..."""
+    return """She is right, because in par1, each interval is referenced twice, so that the interval will be looser since the it choose different values for each instance 
+        of the interval. In par2, each interval is referenced only once, so the interval will be tighter."""
 
 
 def quadratic(x, a, b, c):
@@ -348,6 +356,22 @@ def quadratic(x, a, b, c):
     '0 to 10'
     """
     "*** YOUR CODE HERE ***"
+
+    def f(t):
+        return a * t * t + b * t + c
+
+    extreme_point = -b / (2 * a)
+
+    if extreme_point < lower_bound(x) or extreme_point > upper_bound(x):
+        return interval(
+            min(f(upper_bound(x)), f(lower_bound(x))),
+            max(f(upper_bound(x)), f(lower_bound(x))),
+        )
+
+    return interval(
+        min(f(upper_bound(x)), f(lower_bound(x)), f(extreme_point)),
+        max(f(upper_bound(x)), f(lower_bound(x)), f(extreme_point)),
+    )
 
 
 # Tree ADT

@@ -8,14 +8,12 @@ test = {
           'code': r"""
           >>> # Type AssertionError if you think an AssertionError is raised
           >>> str_interval(div_interval(interval(-1, 2), interval(4, 8)))
-          2e8c7bda368a5e6ec955fc4291448f16
-          # locked
+          '-0.25 to 0.5'
           >>> str_interval(div_interval(interval(4, 8), interval(-1, 2)))
-          cdb0ebefc43667b8c383515c2f76eb4f
-          # locked
+          AssertionError
           """,
           'hidden': False,
-          'locked': True
+          'locked': False
         }
       ],
       'scored': True,
