@@ -4,6 +4,8 @@ Course Website: https://inst.eecs.berkeley.edu/~cs61a/fa20/
 
 This repository contains my solutions for all labs, discussions, projects and homeworks for the course.
 
+All **optional** questions are solved.
+
 ---
 
 ### Code
