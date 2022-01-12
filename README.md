@@ -19,9 +19,11 @@ This repository contains my solutions for all labs, discussions, projects and ho
   - [x] [Lab02](./lab/lab02/lab02.py)
   - [x] [Lab04](./lab/lab04/lab04.py)
   - [x] [Lab05](./lab/lab05/lab05.py)
+  - [x] [Lab06](./lab/lab06/lab06.py)
 - 🔴 **Homework**
   - [x] [Hw01](./homework/hw01/hw01.py)
   - [x] [Hw02](./homework/hw02/hw02.py)
+  - [x] [Hw03](./homework/hw03/hw03.py)
 - 🔴 **Project**
   - [x] [Hog](./project/hog/hog.py)
   - [x] [Cat](./project/cat/cat.py)
