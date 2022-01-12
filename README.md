@@ -24,6 +24,7 @@ This repository contains my solutions for all labs, discussions, projects and ho
   - [x] [Hw01](./homework/hw01/hw01.py)
   - [x] [Hw02](./homework/hw02/hw02.py)
   - [x] [Hw03](./homework/hw03/hw03.py)
+  - [x] [Hw04](./homework/hw04/hw04.py)
 - 🔴 **Project**
   - [x] [Hog](./project/hog/hog.py)
   - [x] [Cat](./project/cat/cat.py)
