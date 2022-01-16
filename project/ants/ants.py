@@ -105,6 +105,7 @@ class Ant(Insect):
 
     implemented = False  # Only implemented Ant classes should be instantiated
     food_cost = 0
+    blocks_path = True
     # ADD CLASS ATTRIBUTES HERE
 
     def __init__(self, armor=1):
@@ -125,7 +126,13 @@ class Ant(Insect):
             place.ant = self
         else:
             # BEGIN Problem Optional 2
-            assert place.ant is None, "Two ants in {0}".format(place)
+            if self.can_contain(place.ant):
+                self.contain_ant(place.ant)
+                place.ant = self
+            elif place.ant.can_contain(self):
+                place.ant.contain_ant(self)
+            else:
+                assert place.ant is None, "Two ants in {0}".format(place)
             # END Problem Optional 2
         Insect.add_to(self, place)
 
@@ -417,6 +424,10 @@ class Bee(Insect):
     damage = 1
     is_watersafe = True
     # OVERRIDE CLASS ATTRIBUTES HERE
+    def __init__(self, armor):
+        Insect.__init__(self, armor)
+        self.scared = False
+        self.direction = True
 
     def sting(self, ant):
         """Attack an ANT, reducing its armor by 1."""
@@ -431,7 +442,7 @@ class Bee(Insect):
         """Return True if this Bee cannot advance to the next Place."""
         # Special handling for NinjaAnt
         # BEGIN Problem Optional
-        return self.place.ant is not None
+        return self.place.ant is not None and self.place.ant.blocks_path
         # END Problem Optional
 
     def action(self, gamestate):
@@ -445,6 +456,9 @@ class Bee(Insect):
         # BEGIN EC
         "*** YOUR CODE HERE ***"
         # END EC
+        if self.direction is False and self.place.entrance != gamestate.beehive:
+            destination = self.place.entrance
+
         if self.blocked():
             self.sting(self.place.ant)
         elif self.armor > 0 and destination is not None:
@@ -474,12 +488,15 @@ class NinjaAnt(Ant):
     food_cost = 5
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem Optional 1
-    implemented = False  # Change to True to view in the GUI
+    implemented = True  # Change to True to view in the GUI
     # END Problem Optional 1
+    blocks_path = False
 
     def action(self, gamestate):
         # BEGIN Problem Optional 1
-        "*** YOUR CODE HERE ***"
+        for bee in self.place.bees[:]:
+            Insect.reduce_armor(bee, self.damage)
+
         # END Problem Optional 1
 
 
@@ -490,12 +507,12 @@ class ContainerAnt(Ant):
 
     def can_contain(self, other):
         # BEGIN Problem Optional 2
-        "*** YOUR CODE HERE ***"
+        return (not self.contained_ant) and (not isinstance(other, ContainerAnt))
         # END Problem Optional 2
 
     def contain_ant(self, ant):
         # BEGIN Problem Optional 2
-        "*** YOUR CODE HERE ***"
+        self.contained_ant = ant
         # END Problem Optional 2
 
     def remove_ant(self, ant):
@@ -515,7 +532,8 @@ class ContainerAnt(Ant):
 
     def action(self, gamestate):
         # BEGIN Optional 2
-        "*** YOUR CODE HERE ***"
+        if self.contained_ant is not None:
+            self.contained_ant.action(gamestate)
         # END Optional 2
 
 
@@ -526,7 +544,11 @@ class BodyguardAnt(ContainerAnt):
     food_cost = 4
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Optional 2
-    implemented = False  # Change to True to view in the GUI
+    implemented = True  # Change to True to view in the GUI
+
+    def __init__(self, armor=2):
+        super().__init__(armor)
+
     # END Optional 2
 
 
@@ -538,7 +560,7 @@ class TankAnt(ContainerAnt):
     food_cost = 6
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem Optional 3
-    implemented = False  # Change to True to view in the GUI
+    implemented = True  # Change to True to view in the GUI
     # END Problem Optional 3
 
     def __init__(self, armor=2):
@@ -546,7 +568,9 @@ class TankAnt(ContainerAnt):
 
     def action(self, gamestate):
         # BEGIN Problem Optional 3
-        "*** YOUR CODE HERE ***"
+        super().action(gamestate)
+        for b in self.place.bees[:]:
+            Insect.reduce_armor(b, self.damage)
         # END Problem Optional 3
 
 
@@ -561,8 +585,14 @@ def make_slow(action, bee):
     action -- An action method of some Bee
     """
     # BEGIN Problem Optional 4
-    "*** YOUR CODE HERE ***"
-    # END Problem Optional 4
+    def slow_action(gamestate):
+        if gamestate.time % 2 == 0:
+            action(gamestate)
+
+    return slow_action
+
+
+# END Problem Optional 4
 
 
 def make_scare(action, bee):
@@ -571,14 +601,31 @@ def make_scare(action, bee):
     action -- An action method of some Bee
     """
     # BEGIN Problem Optional 4
-    "*** YOUR CODE HERE ***"
+    def scare_action(gamestate):
+        bee.direction = False
+        action(gamestate)
+
+    return scare_action
     # END Problem Optional 4
 
 
 def apply_status(status, bee, length):
     """Apply a status to a BEE that lasts for LENGTH turns."""
     # BEGIN Problem Optional 4
-    "*** YOUR CODE HERE ***"
+    old_action = bee.action
+    new_action = status(bee.action, bee)
+
+    def action(gamestate):
+        nonlocal length
+        if length > 0:
+            new_action(gamestate)
+            length -= 1
+        else:
+            if status == make_scare:
+                bee.direction = True
+            old_action(gamestate)
+
+    bee.action = action
     # END Problem Optional 4
 
 
@@ -588,7 +635,7 @@ class SlowThrower(ThrowerAnt):
     name = "Slow"
     food_cost = 4
     # BEGIN Problem Optional 4
-    implemented = False  # Change to True to view in the GUI
+    implemented = True  # Change to True to view in the GUI
     # END Problem Optional 4
 
     def throw_at(self, target):
@@ -602,13 +649,14 @@ class ScaryThrower(ThrowerAnt):
     name = "Scary"
     food_cost = 6
     # BEGIN Problem Optional 4
-    implemented = False  # Change to True to view in the GUI
+    implemented = True  # Change to True to view in the GUI
     # END Problem Optional 4
 
     def throw_at(self, target):
         # BEGIN Problem Optional 4
-        "*** YOUR CODE HERE ***"
-        # END Problem Optional 4
+        if target and not target.scared:
+            apply_status(make_scare, target, 2)
+            target.scared = True
 
 
 class LaserAnt(ThrowerAnt):
