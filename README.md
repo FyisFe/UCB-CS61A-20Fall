@@ -15,6 +15,9 @@ All **optional** questions are solved.
   - [x] [Disc03](./disc/disc03.py)
   - [x] [Disc04](./disc/disc04.py)
   - [x] [Disc05](./disc/disc05.py)
+  - [x] [Disc06](./disc/disc06.py)
+  - [x] [Disc07](./disc/disc07.py)
+  - [x] [Disc08](./disc/disc08.py)
 - 🔴 **Lab**
   - [x] [Lab00](./lab/lab00/lab00.py)
   - [x] [Lab01](./lab/lab01/lab01.py)
