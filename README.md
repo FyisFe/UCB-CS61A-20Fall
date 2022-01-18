@@ -27,6 +27,7 @@ All **optional** questions are solved.
   - [x] [Lab06](./lab/lab06/lab06.py)
   - [x] [Lab07](./lab/lab07)
   - [x] [Lab08](./lab/lab08/lab08.py)
+  - [x] [Lab09](./lab/lab09/lab09.py)
 - 🔴 **Homework**
   - [x] [Hw01](./homework/hw01/hw01.py)
   - [x] [Hw02](./homework/hw02/hw02.py)
