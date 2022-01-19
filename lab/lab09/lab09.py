@@ -1,6 +1,3 @@
-from ucb import trace
-
-
 def insert_into_all(item, nested_list):
     """Assuming that nested_list is a list of lists, return a new list
     consisting of all the lists in nested_list, but with item added to

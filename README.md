@@ -35,6 +35,7 @@ All **optional** questions are solved.
   - [x] [Hw03](./homework/hw03/hw03.py)
   - [x] [Hw04](./homework/hw04/hw04.py)
   - [x] [Hw05](./homework/hw05/hw05.py)
+  - [x] [Hw06](./homework/hw06/hw06.scm)
 - 🔴 **Project**
   - [x] [Hog](./project/hog/hog.py)
   - [x] [Cats](./project/cats/cats.py)
