@@ -29,6 +29,7 @@ All **optional** questions are solved.
   - [x] [Lab08](./lab/lab08/lab08.py)
   - [x] [Lab09](./lab/lab09/lab09.py)
   - [x] [Lab10](./lab/lab10/lab10.scm)
+  - [x] [Lab11](./lab/lab11/expr.py)
 - 🔴 **Homework**
   - [x] [Hw01](./homework/hw01/hw01.py)
   - [x] [Hw02](./homework/hw02/hw02.py)
@@ -36,6 +37,7 @@ All **optional** questions are solved.
   - [x] [Hw04](./homework/hw04/hw04.py)
   - [x] [Hw05](./homework/hw05/hw05.py)
   - [x] [Hw06](./homework/hw06/hw06.scm)
+  - [x] [Hw07](./homework/hw07/hw07.scm)
 - 🔴 **Project**
   - [x] [Hog](./project/hog/hog.py)
   - [x] [Cats](./project/cats/cats.py)
