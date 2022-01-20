@@ -40,6 +40,7 @@ All **optional** questions are solved.
   - [x] [Hw06](./homework/hw06/hw06.scm)
   - [x] [Hw07](./homework/hw07/hw07.scm)
   - [x] [Hw08](./homework/hw08/hw08.scm)
+  - [x] [Hw09](./homework/hw09/hw09.sql)
 - 🔴 **Project**
   - [x] [Hog](./project/hog/hog.py)
   - [x] [Cats](./project/cats/cats.py)
