@@ -38,10 +38,12 @@ All **optional** questions are solved.
   - [x] [Hw05](./homework/hw05/hw05.py)
   - [x] [Hw06](./homework/hw06/hw06.scm)
   - [x] [Hw07](./homework/hw07/hw07.scm)
+  - [x] [Hw08](./homework/hw08/hw08.scm)
 - 🔴 **Project**
   - [x] [Hog](./project/hog/hog.py)
   - [x] [Cats](./project/cats/cats.py)
   - [x] [Ants](./project/ants/ants.py)
+  - [x] [Scheme](./project/scheme)
 
 ---
 
