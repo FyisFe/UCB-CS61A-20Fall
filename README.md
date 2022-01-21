@@ -18,7 +18,7 @@ All **optional** questions are solved.
   - [x] [Disc06](./disc/disc06.py)
   - [x] [Disc07](./disc/disc07.py)
   - [x] [Disc08](./disc/disc08.py)
-- 🔴 **Lab**
+- ✅ **Lab**
   - [x] [Lab00](./lab/lab00/lab00.py)
   - [x] [Lab01](./lab/lab01/lab01.py)
   - [x] [Lab02](./lab/lab02/lab02.py)
@@ -32,7 +32,8 @@ All **optional** questions are solved.
   - [x] [Lab11](./lab/lab11/expr.py)
   - [x] [Lab12](./lab/lab12/lab12.sql)
   - [x] [Lab13](./lab/lab13/lab13.sql)
-- 🔴 **Homework**
+  - [x] [Lab14](./lab/lab14/lab14.py)
+- ✅ **Homework**
   - [x] [Hw01](./homework/hw01/hw01.py)
   - [x] [Hw02](./homework/hw02/hw02.py)
   - [x] [Hw03](./homework/hw03/hw03.py)
@@ -42,7 +43,7 @@ All **optional** questions are solved.
   - [x] [Hw07](./homework/hw07/hw07.scm)
   - [x] [Hw08](./homework/hw08/hw08.scm)
   - [x] [Hw09](./homework/hw09/hw09.sql)
-- 🔴 **Project**
+- ✅ **Project**
   - [x] [Hog](./project/hog/hog.py)
   - [x] [Cats](./project/cats/cats.py)
   - [x] [Ants](./project/ants/ants.py)
