@@ -2,7 +2,7 @@
 
 Course Website: https://inst.eecs.berkeley.edu/~cs61a/fa20/
 
-This repository contains my solutions for all labs, discussions, projects and homeworks for the course.
+This repository contains my solutions for all labs, discussions (except for scheme, not really interest in it), projects and homeworks for the course.
 
 All **optional** questions are solved.
 
@@ -10,7 +10,7 @@ All **optional** questions are solved.
 
 ### Code
 
-- 🔴 **Discussion**
+- ✅ **Discussion**
   - [x] [Disc02](./disc/disc02.py)
   - [x] [Disc03](./disc/disc03.py)
   - [x] [Disc04](./disc/disc04.py)
@@ -18,6 +18,9 @@ All **optional** questions are solved.
   - [x] [Disc06](./disc/disc06.py)
   - [x] [Disc07](./disc/disc07.py)
   - [x] [Disc08](./disc/disc08.py)
+  - [x] [Disc11](./disc/disc11.py)
+  - [x] [Disc12](./disc/disc12.sql)
+  - [x] [Disc14](./disc/disc14.py)
 - ✅ **Lab**
   - [x] [Lab00](./lab/lab00/lab00.py)
   - [x] [Lab01](./lab/lab01/lab01.py)
